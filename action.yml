@@ -1,0 +1,33 @@
+name: "terraform-unlock-state"
+description: "plans a terraform configuration"
+inputs:
+  region:
+    description: "aws region name"
+    required: true
+  access-key:
+    description: "access key"
+    required: true
+  secret-key:
+    description: "secret key"
+    required: true
+  terraform-folder:
+    description: "folder where your terraform configuration is"
+    required: true
+  backend-configuration:
+    description: "file with additional backend configuration"
+    required: true
+  lock-id:
+    description: "LOCK_ID for the terraform force-unlock command"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        ${{ github.action_path }}/tfm-unlock-state.sh \
+          -r "${{ inputs.region }}" \
+          -a "${{ inputs.access-key }}" \
+          -s "${{ inputs.secret-key }}" \
+          -t "${{ inputs.terraform-folder }}" \
+          -b "${{ inputs.backend-configuration }}" \
+          -p "${{ inputs.lock-id }}"
+      shell: bash
