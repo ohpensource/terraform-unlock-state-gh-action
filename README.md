@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ohpensource/terraform-unlock-state-gh-action@v0.0.1
+      - uses: ohpensource/terraform-unlock-state-gh-action@v0.0.3
         name: terraform plan
         with:
           region: $REGION
